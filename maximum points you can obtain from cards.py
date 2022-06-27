@@ -2,7 +2,7 @@ class Solution(object):
     def maxScore(self, cardPoints, k):
         
         # O(n^2) sum(n elements) is O(n) too
-        
+
         result = sum(cardPoints[:k])
         if len(cardPoints)<2:
             return result
