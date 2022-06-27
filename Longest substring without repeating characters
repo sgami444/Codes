@@ -1,0 +1,22 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        res = 0
+        for i in range(len(s)):
+            d={}
+            j=i
+            temp=0
+            # print("i: "+str(i))
+            while s[j] not in d and j<len(s):
+                # print("j: "+str(j))
+                d[s[j]]=s[j]
+                j+=1
+                temp+=1
+                # print temp
+                if j==len(s):
+                    break
+            res = temp if temp>res else res
+        return res
