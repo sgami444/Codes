@@ -1,0 +1,52 @@
+class Solution(object):
+    def myAtoi(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        res="0"
+        i = 0
+        spaceflag = True
+        hyphenflag = True
+        while True:
+            if i == len(s):
+                if res=='-' or res=='+':
+                    return 0
+                if int(res)<-2147483648:
+                    return -2147483648
+                if int(res)>2147483647:
+                    return 2147483647
+                return int(res) if len(res)>0 else 0
+            if self.isSpace(s[i], spaceflag):
+                i+=1
+                continue
+            if self.isHyphen(s[i], hyphenflag):
+                res = s[i]
+                i+=1
+                hyphenflag = False
+                spaceflag = False
+                continue
+            if self.isDigit(s[i]):
+                hyphenflag = False
+                spaceflag = False
+                res = res+s[i]
+                i+=1
+                continue
+            if res=='-' or res=='+':
+                return 0
+            if int(res)<-2147483648:
+                return -2147483648
+            if int(res)>2147483647:
+                return 2147483647
+            return int(res) if len(res)>0 else 0
+        
+        
+        
+    def isSpace(self, s, flag):
+        return (True and flag) if s==' ' else False
+    
+    def isDigit(self, s):
+        return True if s=='0' or s=='1' or s=='2' or s=='3' or s=='4' or s=='5' or s=='6' or s=='7' or s=='8' or s=='9' else False
+    
+    def isHyphen(self, s, flag):
+        return True and flag if s=='-' or s=='+' else False
