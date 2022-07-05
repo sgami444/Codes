@@ -1,0 +1,31 @@
+class Solution(object):
+    def minWindow(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        left = 0
+        right = 1
+        if not self.isPresent(s, t):
+            return ""
+        else:
+            res = s[:]
+        while right<=len(s):
+            if not self.isPresent(s[left:right], t):
+                right+=1
+            else:
+                temp = s[left:right]
+                res = temp[:] if len(temp)<len(res) else res
+                left+=1
+            
+        return res
+    
+    def isPresent(self, string, check):
+        check = list(check)
+        string = list(string)
+        for i in check:
+            if i not in string:
+                return False
+            string.remove(i)
+        return True
