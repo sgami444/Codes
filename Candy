@@ -1,0 +1,30 @@
+class Solution(object):
+    def candy(self, ratings):
+        """
+        :type ratings: List[int]
+        :rtype: int
+        """
+        if len(ratings)==1:
+            return 1
+        candies = [1]*len(ratings)
+        change = True
+        while change:
+            change = False
+            check = candies[:]
+            for i in range(len(ratings)):
+                if i == 0:
+                    if ratings[i]>ratings[i+1]:
+                        candies[i] = candies[i+1] + 1 if candies[i] <= candies[i+1] else candies[i]
+                        change = True
+                elif i<len(ratings)-1:
+                    if ratings[i]>ratings[i+1]:
+                        candies[i] = candies[i+1] + 1 if candies[i] <= candies[i+1] else candies[i]
+                        change = True
+                    if ratings[i]>ratings[i-1]:
+                        candies[i] = candies[i-1] + 1 if candies[i] <= candies[i-1] else candies[i]
+                        change = True
+                else:
+                    if ratings[i]>ratings[i-1]:
+                        candies[i] = candies[i-1] + 1 if candies[i] <= candies[i-1] else candies[i]
+                        change = True
+        return sum(candies)
