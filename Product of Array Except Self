@@ -1,0 +1,21 @@
+class Solution(object):
+    def productExceptSelf(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        prod = 1
+        for i in nums:
+            prod = prod * i
+        res = []
+        for i in range(len(nums)):
+            if nums[i]!=0:
+                res.append(prod/nums[i])
+            else:
+                temp = 1
+                for j in range(0,i):
+                    temp = temp * nums[j]
+                for j in range(i+1,len(nums)):
+                    temp = temp * nums[j]
+                res.append(temp)
+        return res
